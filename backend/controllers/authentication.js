@@ -1,12 +1,13 @@
 const User = require('../models/user')
 const jwt = require('jwt-simple')
+const crypto = require('crypto');
 
 const tokenForUser = (user) => {
   const timestamp = new Date().getTime()
   return jwt.encode({sub: user.id, iat: timestamp}, "SECRET")
 }
 
-exports.signin = (req, res, next) => req.user.isEmailVerified ? res.send({ token: tokenForUser(req.user)}) :
+exports.signin = (req, res, next) => req.user.isVerified ? res.send({ token: tokenForUser(req.user)}) :
 	res.status(401).send({error: "Your account has not been verified."});
 
 exports.signup = (req, res, next) => {
@@ -31,9 +32,12 @@ exports.signup = (req, res, next) => {
   	  password
   	});
 
+	  const verificationToken = crypto.randomBytes(16).toString('hex');
 
-  	 user.saveHashPassword();
-  	 user.sendVerifyEmail();
+  	  user.saveHashPassword();
+	  user.isVerified = false;
+	  user.verificationToken = verificationToken;
+  	  user.sendVerifyEmail(verificationToken);
 
   	user.save((err) => {
   	  if (err) { return next(err) }
@@ -111,9 +115,9 @@ exports.verifyAccount = (req, res, next) => {
   	if (user) {
   	  if(user.verificationToken === hash){
   	  	user.verificationToken = null;
-  	  	user.isEmailVerified = true;
+  	  	user.isVerified = true;
   	  	user.save()
-  	  	res.send({status: "Your profile activated successfully"})
+  	  	res.send({message: "Your profile activated successfully"})
 	  } else {
 		  res.status(406).send({status: "Wrong hash"});
 	  }

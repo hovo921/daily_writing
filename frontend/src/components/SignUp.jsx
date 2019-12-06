@@ -2,10 +2,8 @@ import React, { useState, useRef } from "react";
 import { Button, Form, Container, Header, Message } from "semantic-ui-react";
 import API from "../api";
 import {
-  DASHBOARD_PATH,
   SIGN_IN_PATH,
-  TOKEN,
-  VERIFYEMAIL_PATH
+  TOKEN, VERIFY_EMAIL_PATH
 } from "../configs/constants";
 import { useStateValue } from "../context";
 import { Link } from "react-router-dom";
@@ -29,25 +27,19 @@ const SignUp = ({ history }) => {
 
     setLoading(false);
 
-    if (true) {
+    const response = await API.signUp(emailVal, passwordVal);
+    const data = await response.json();
 
-      console.log('emailVal', emailVal);
+    if (data.token) {
 
-      history.push(VERIFYEMAIL_PATH);
+      dispatch(loginSuccess);
+      localStorage.setItem(TOKEN, data.token);
+      history.push(VERIFY_EMAIL_PATH);
       dispatchVerifyEmail({ type: GET_VERIFEMAIL, payload: emailVal });
+
+    } else {
+      setError(data.error);
     }
-
-    // const response = await API.signUp(emailVal, passwordVal);
-    // const data = await response.json();
-
-    // if (data.token) {
-
-    //   dispatch(loginSuccess);
-    //   localStorage.setItem(TOKEN, data.token);
-    //   history.push(DASHBOARD_PATH);
-    // } else {
-    //   setError(data.error);
-    // }
   }
 
   return (

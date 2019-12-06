@@ -45,13 +45,8 @@ userSchema.methods.resetPassword = async function (host) {
   this.save()
 };
 
-userSchema.methods.sendVerifyEmail = async function () {
-  const verificationToken = crypto.randomBytes(16).toString('hex');
-  await Nodemailer.sendVerificationEmail(this.email, verificationToken)
-  user.isEmailVerified = false;
-  user.verificationToken = verificationToken;
-  this.save()
-  return this
+userSchema.methods.sendVerifyEmail = async function (verificationToken) {
+  await Nodemailer.sendVerificationEmail(this.email, verificationToken);
 };
 
 const ModelClass = mongoose.model('user', userSchema);

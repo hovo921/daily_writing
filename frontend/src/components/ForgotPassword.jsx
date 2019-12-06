@@ -28,6 +28,10 @@ const ForgotPassword = ({ history }) => {
     const emailVal = emailRef.current.value;
     setLoading(false);
 
+    const response = await API.resetPassword(emailVal);
+    const data = await response.json();
+    console.log(data)
+
     if (true) {
       //some
     } else setError(true);

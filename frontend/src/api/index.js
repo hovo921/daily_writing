@@ -1,6 +1,6 @@
 import {TOKEN} from "../configs/constants";
 
-const API_URL = "https://funny-bulldog-86.localtunnel.me/";
+const API_URL = "http://localhost:3090";
 
 export default class API {
     static signUp(email, password){
@@ -39,6 +39,23 @@ export default class API {
             headers: {"Authorization": localStorage.getItem(TOKEN)},
             body: JSON.stringify({
                 date
+            })
+        })
+    }
+
+    static verifyAccount(email, hash){
+        return fetch(`${API_URL}/verify-account/${email}/${hash}`, {
+            method: "POST",
+            headers: {"Authorization": localStorage.getItem(TOKEN)}
+        })
+    }
+
+    static resetPassword(email){
+        return fetch(`${API_URL}/reset-password`, {
+            method: "POST",
+            headers: {"Authorization": localStorage.getItem(TOKEN)},
+            body: JSON.stringify({
+                email
             })
         })
     }
