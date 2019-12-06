@@ -115,6 +115,7 @@ const Progress = ({count}) => {
                 <div style={{display: "flex", marginTop: 20, marginBottom: 20}}>
                     <FaChevronLeft/>
                     {daysInThisMonth().map(e => (<div
+                            key={e.text}
                         className={`day-slider ${e.isActive && "day-slider-active"}`}
                         data-tip={e.text}
                         >

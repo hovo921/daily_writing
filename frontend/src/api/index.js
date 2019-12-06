@@ -59,4 +59,15 @@ export default class API {
             })
         })
     }
+
+    static changePassword(email, hash, password){
+        return fetch(`${API_URL}/change-password/${email}/${hash}`, {
+            method: "POST",
+            headers: {"Authorization": localStorage.getItem(TOKEN)},
+            body: JSON.stringify({
+                password
+            })
+
+        })
+    }
 }

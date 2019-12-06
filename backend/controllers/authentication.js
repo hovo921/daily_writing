@@ -58,7 +58,7 @@ exports.resetPassword = (req, res, next) => {
   		return next(err)
   	}
   	if (user) {
-  	  await user.resetPassword(req);
+  		await user.resetPassword(req);
   	  return res.status(200).send({status: 'Check your email for reset password'})
   	}
   })
@@ -88,13 +88,13 @@ exports.changePassword = (req, res, next) => {
   	  	user.password = password;
   	  	user.saveHashPassword();
   	  	user.save()
-  	  	res.send({status: "Your password changed successfully"})
+  	  	res.send({message: "Your password changed successfully"})
 	  } else {
 		  res.status(406).send({status: "Wrong hash"});
 	  }
   	}
   	else {
-  		res.status(401).send({message: "User does not exist"})
+  		res.status(401).send({status: "User does not exist"})
 	}
   })
 };

@@ -34,19 +34,18 @@ userSchema.methods.saveHashPassword = function () {
   })
 };
 
-userSchema.methods.resetPassword = async function (host) {
-  if(!host){
-    host ="http://localhost:3000";
-  }
+userSchema.methods.resetPassword = async function () {
   const resetPasswordToken = crypto.randomBytes(16).toString('hex');
-  const url  = host + '/reset-password/' + resetPasswordToken
-  await Nodemailer.sendResetPasswordMessage(this.email, url);
+  const url  = "http://localhost:3000" + '/reset-password?email=' + this.email + '&hash=' + resetPasswordToken;
   this.resetPasswordToken = resetPasswordToken;
   this.save()
+  return  Nodemailer.sendResetPasswordMessage(this.email, url);
 };
 
 userSchema.methods.sendVerifyEmail = async function (verificationToken) {
-  await Nodemailer.sendVerificationEmail(this.email, verificationToken);
+  const url  = "http://localhost:3000" + '/activate-profile?email=' + this.email + '&hash=' + verificationToken;
+
+  await Nodemailer.sendVerificationEmail(this.email, url);
 };
 
 const ModelClass = mongoose.model('user', userSchema);

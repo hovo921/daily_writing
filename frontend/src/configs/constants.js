@@ -7,6 +7,7 @@ export const DASHBOARD_PATH  = "/dashboard";
 export const VERIFY_EMAIL_PATH  = "/verify-email";
 export const FORGOT_PASSWORD_PATH  = "/forgot-password";
 export const ACTIVATE_PROFILE  = "/activate-profile";
+export const RESET_PASSWORD  = "/reset-password";
 
 
 /**

@@ -39,15 +39,11 @@ class Nodemailer {
                 subject: 'Reset your password',
                 html: '<body><p>Click button bellow to reset your password</p>' +
                     '<a href="' + href + '" > Reset your password </a></body>' +
-                    '<p>or use link </p> ' + href
+                    '<p>or use link </p>'
             };
 
-            transporter.sendMail(mailOptions, function (err, info) {
-                if(err)
-                    console.log(err);
-                else
-                    console.log(info);
-            });
+            return transporter.sendMail(mailOptions)
+
         }
 }
 

@@ -24,18 +24,24 @@ const SignUp = ({history}) => {
         const passwordVal = passwordEl.current.value;
 
 
-        const response = await API.signIn(emailVal, passwordVal);
-        const data = await response.json();
-
-        setLoading(false);
-
-        if (data.token) {
-            dispatch(loginSuccess);
-            localStorage.setItem(TOKEN, data.token);
-            history.push(DASHBOARD_PATH)
+        const response = await API.signIn(emailVal, passwordVal)
+        if(response.status === 401){
+            setLoading(false);
+            setError("Wrong email and/or password")
         } else {
-            setError(data.error);
+            const data = await response.json();
+
+            setLoading(false);
+
+            if (data.token) {
+                dispatch(loginSuccess);
+                localStorage.setItem(TOKEN, data.token);
+                history.push(DASHBOARD_PATH)
+            } else {
+                setError(data.error);
+            }
         }
+
     }
 
     return (
@@ -59,7 +65,7 @@ const SignUp = ({history}) => {
                     <Link to={SIGN_UP_PATH}>Don't have an account ?</Link>
                 </Form.Field>
                 <Button type='submit'>Login</Button>
-                
+
             </Form>
         </Container>
     )
