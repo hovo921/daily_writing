@@ -1,7 +1,7 @@
 import React, {useState, useRef} from "react";
 import { Button, Form, Container, Header, Message } from 'semantic-ui-react';
 import API from "../api";
-import {DASHBOARD_PATH, SIGN_IN_PATH, SIGN_UP_PATH, TOKEN} from "../configs/constants";
+import {DASHBOARD_PATH, SIGN_IN_PATH, SIGN_UP_PATH, TOKEN, FORGOT_PASSWORD_PATH} from "../configs/constants";
 import {useStateValue} from "../context";
 import {Link} from "react-router-dom";
 import {loginSuccess} from "../context/actions";
@@ -54,9 +54,12 @@ const SignUp = ({history}) => {
                         content={error}
                     />
                 </Form.Field>
+                <Form.Field className="auth-links">
+                    <Link to={FORGOT_PASSWORD_PATH}>Forgot password?</Link>
+                    <Link to={SIGN_UP_PATH}>Don't have an account ?</Link>
+                </Form.Field>
                 <Button type='submit'>Login</Button>
-                <Link to={SIGN_UP_PATH}>Don't have an account ?</Link>
-
+                
             </Form>
         </Container>
     )
