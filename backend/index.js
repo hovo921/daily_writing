@@ -18,4 +18,4 @@ router(app)
 
 const port = process.env.PORT || 3090
 
-app.listen(port, () => console.log('Listening...'))
+app.listen(port, () => console.log('Listening... on port   ' + port))
