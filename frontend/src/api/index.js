@@ -1,6 +1,6 @@
 import {TOKEN} from "../configs/constants";
 
-const API_URL = "http://localhost:3090";
+const API_URL = "https://funny-bulldog-86.localtunnel.me/";
 
 export default class API {
     static signUp(email, password){
