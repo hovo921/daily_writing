@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/Projectmanager1106/Daily_writing/issues"
   },
+  "dependencies": {
+    "esm": "^3.2.25",
+    "mongoose": "^5.7.7"
+  },
   "homepage": "https://github.com/Projectmanager1106/Daily_writing#readme"
 }
