@@ -9,7 +9,7 @@ const router = require('./router')
 
 const app = express();
 
-// mongoose.connect('mongodb://<dbuser>:<Mlirj45s>@ds249718.mlab.com:49718/oktob');
+mongoose.connect('mongodb://admin:admin123@ds249718.mlab.com:49718/oktob');
 
 app.use(cors())
 app.use(morgan('combined'));
