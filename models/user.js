@@ -36,14 +36,14 @@ userSchema.methods.saveHashPassword = function () {
 
 userSchema.methods.resetPassword = async function () {
   const resetPasswordToken = crypto.randomBytes(16).toString('hex');
-  const url  = "http://localhost:3000" + '/reset-password?email=' + this.email + '&hash=' + resetPasswordToken;
+  const url  = "http://oktob.online" + '/reset-password?email=' + this.email + '&hash=' + resetPasswordToken;
   this.resetPasswordToken = resetPasswordToken;
   this.save()
   return  Nodemailer.sendResetPasswordMessage(this.email, url);
 };
 
 userSchema.methods.sendVerifyEmail = async function (verificationToken) {
-  const url  = "http://localhost:3000" + '/activate-profile?email=' + this.email + '&hash=' + verificationToken;
+  const url  = "http://oktob.online" + '/activate-profile?email=' + this.email + '&hash=' + verificationToken;
 
   await Nodemailer.sendVerificationEmail(this.email, url);
 };
