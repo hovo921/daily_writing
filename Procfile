@@ -1,1 +1,1 @@
-web:NODE_ENV=prod JWT_KEY=secret node -r esm backend/index.js
+web:NODE_ENV=prod JWT_KEY=secret cd backend && npm i  && npm run dev
