@@ -9,7 +9,7 @@ const router = require('./router')
 
 const app = express();
 
-mongoose.connect('mongodb://ds249718.mlab.com:49718/oktob');
+// mongoose.connect('mongodb://<dbuser>:<Mlirj45s>@ds249718.mlab.com:49718/oktob');
 
 app.use(cors())
 app.use(morgan('combined'));
@@ -18,4 +18,4 @@ router(app)
 
 const port = process.env.PORT || 3090
 
-app.listen(port, () => console.log('Listening... on port   ' + port));
+app.listen(port, () => console.log('Listening... on port   ' + port))
