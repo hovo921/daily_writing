@@ -1,0 +1,19 @@
+{
+  "name": "daily_writing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd backend && npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Projectmanager1106/Daily_writing.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Projectmanager1106/Daily_writing/issues"
+  },
+  "homepage": "https://github.com/Projectmanager1106/Daily_writing#readme"
+}
