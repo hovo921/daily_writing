@@ -19,7 +19,7 @@ exports.signup = (req, res, next) => {
   const userName = req.body.userName;
 
   if (!email || !password || !name || !userName) {
-  	return res.status(422).send({error: "You must provide email and password"})
+  	return res.status(422).send({error: "Please fill required fields"})
   }
 
   User.findOne({email}, async (err, existingUser) => {
