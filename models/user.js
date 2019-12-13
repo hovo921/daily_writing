@@ -7,6 +7,8 @@ const crypto = require('crypto');
 const userSchema = new Schema({
   email: { type: String, unique: true, lowercase: true },
   password: String,
+  name: String,
+  userName: String,
   isVerified: { type: Boolean, default: false },
   verificationToken: String,
   resetPasswordToken: String

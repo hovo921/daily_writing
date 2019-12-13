@@ -7,14 +7,18 @@ const tokenForUser = (user) => {
   return jwt.encode({sub: user.id, iat: timestamp}, "SECRET")
 }
 
-exports.signin = (req, res, next) => req.user.isVerified ? res.send({ token: tokenForUser(req.user)}) :
-	res.status(401).send({error: "Your account has not been verified."});
+// exports.signin = (req, res, next) => req.user.isVerified ? res.send({ token: tokenForUser(req.user)}) :
+// // 	res.status(401).send({error: "Your account has not been verified."});
+
+exports.signin = (req, res, next) => res.send({ token: tokenForUser(req.user)});
 
 exports.signup = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
+  const name = req.body.password;
+  const userName = req.body.userName;
 
-  if (!email || !password) {
+  if (!email || !password || !name || !userName) {
   	return res.status(422).send({error: "You must provide email and password"})
   }
 
@@ -29,15 +33,17 @@ exports.signup = (req, res, next) => {
 
   	const user = new User({
   	  email,
-  	  password
+  	  password,
+	  name,
+	  userName
   	});
 
-	  const verificationToken = crypto.randomBytes(16).toString('hex');
-
-  	  user.saveHashPassword();
-	  user.isVerified = false;
-	  user.verificationToken = verificationToken;
-  	  user.sendVerifyEmail(verificationToken);
+	  // const verificationToken = crypto.randomBytes(16).toString('hex');
+	  //
+  	//   user.saveHashPassword();
+	  // user.isVerified = false;
+	  // user.verificationToken = verificationToken;
+  	//   user.sendVerifyEmail(verificationToken);
 
   	user.save((err) => {
   	  if (err) { return next(err) }
