@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const moment = require("moment");
 
 const wordSchema = new Schema({
-  text:  String,
+  text:  {type:String, default: ""},
   owner: String,
   createdAt: String,
   date: Date,
